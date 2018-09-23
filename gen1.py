@@ -10,8 +10,9 @@ def is_prime(number):
         return True
     return False
 
+
 def get_primes(input_list):
     return (element for element in input_list if is_prime(element))
 
 
-print(type(get_primes([3,4,5,6,7,8,9,10])))
+print(type(get_primes([3, 4, 5, 6, 7, 8, 9, 10])))
