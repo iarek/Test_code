@@ -1,0 +1,109 @@
+
+class A(object):
+    def __init__(self,var_a):
+        self.var_a = var_a
+        self._var_b = "Default_var_b"
+
+    @property
+    def var_aa(self):
+    	return self.var_a
+
+    @property
+    def var_bb(self):
+    	return self._var_b
+
+    @var_bb.setter
+    def var_bb(self, var):
+    	self._var_b = var
+
+print('---- start ---')
+a = A('Variable_a_First')
+
+print(a.var_a)
+print(a.var_aa)
+
+print(getattr(a, 'dd', 'nie ma takiego atrybutu'))
+#print(a.dd)
+
+print(a.var_bb)
+
+a.var_bb = 'Changed var_bb value'
+print(a.var_bb)
+
+
+class B(object):
+	def __init__(self,c):
+		self.c = c
+
+	def change_attr(self, cc):
+		setattr(self, 'c', cc)
+
+b = B('abla')
+print(b.c)
+b.change_attr('abla_222')
+print(b.c)
+
+
+
+# testing if all()
+d = {
+	'a': 'A',
+	'b': 'B',
+	'c': 'C',
+}
+dd = {
+	'a': 'A',
+	'b': 'B',
+	'c': 'False',
+}
+
+print(d)
+
+#if all(d == d):
+#    print('takie same')
+#else:
+#    print('rozne')
+
+print(all(['heloo','dupa','']))
+
+
+
+#for n, h in d.items():
+print([k for k, v in dd.items()])
+
+h = {
+	'h1': {
+		'a': 'A',
+		'b': 'B',
+		'c': 'C',
+		'd': 'D',
+		},
+	'h2': {
+		'a': 'A',
+		'b': 'B',
+		'c': 'CC',
+		'd': 'D',
+		},
+}
+hh = {
+	'a': 'A',
+	'd': 'D',
+}
+
+def abla(host, **kwargs):
+    
+    for n, h in host.items():
+
+        for k, v in kwargs.items():
+            if h.get(k) == v:
+                print('good !!!!')
+
+def abla2(host, **kwargs):
+    filtered = {
+        n: h
+        for n, h in host.items()
+        if all(h.get(k) == v for k, v in kwargs.items())
+       }
+    return filtered
+abla(h,a='A',b='B')
+print(abla2(h,a='A',b='B',c='C'))
